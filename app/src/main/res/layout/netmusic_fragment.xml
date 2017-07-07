@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="敬请期待"
-        android:textSize="30dp" />
+    <RelativeLayout
+        android:id="@+id/select_linear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_query"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/player_btn_searchlyrics_select" />
+
+        <EditText
+            android:id="@+id/select_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/iv_query"
+            android:background="@drawable/select_text"
+            />
+
+        <Button
+            android:id="@+id/bt_select"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="3sp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/select_button"
+            android:text="搜索" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_webMusic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_below="@id/select_linear"
+        >
+
+    </ListView>
+
+</LinearLayout>

@@ -24,7 +24,6 @@ import com.mayday.mv_until.video_information;
 import com.mayday.xy.customproject.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by xy-pc on 2017/5/28.
@@ -94,8 +93,6 @@ public class mv_fragment extends Fragment {
         mRecycler_view.setLayoutManager(mLayoutManager);
         mRecycler_view.setAdapter(adapter);
         mRecycler_view.addItemDecoration(new MDStaggeredRvDividerDecoration(getActivity()));
-
-
     }
 
     private void initDate() {

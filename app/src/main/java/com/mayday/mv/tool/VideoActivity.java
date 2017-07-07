@@ -60,7 +60,6 @@ public class VideoActivity extends Activity implements Runnable {
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

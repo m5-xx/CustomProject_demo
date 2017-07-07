@@ -32,7 +32,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.localmusic_adapter, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.localmusic_adapter, null);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "642617187295",
+    "firebase_url": "https://m5music-d8cfa.firebaseio.com",
+    "project_id": "m5music-d8cfa",
+    "storage_bucket": "m5music-d8cfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642617187295:android:a3c78227cf0848d7",
+        "android_client_info": {
+          "package_name": "com.mayday.xy.customproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642617187295-ptbb29cu3kvvl0rucnh3j6bibl2rbdha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mayday.xy.customproject",
+            "certificate_hash": "fd623ab798d61b02750e290ad1b61dfeeb3c2b37"
+          }
+        },
+        {
+          "client_id": "642617187295-kntuqhgfnisdnnd44kb5pikc6d16ge4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA17H0Vq22M0rrQo30GxDFAw_wGrnLjlfk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642617187295-kntuqhgfnisdnnd44kb5pikc6d16ge4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

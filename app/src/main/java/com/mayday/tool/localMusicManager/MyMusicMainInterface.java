@@ -108,7 +108,7 @@ public class MyMusicMainInterface extends BaseActivity implements View.OnClickLi
         }
         Log.i("chenxiaoxiao", "--------------->>"+isExist);
         //显示专辑封面
-        showAlbumCover();
+//        showAlbumCover();
         //获取歌曲信息
         showTitleAndSinger();
     }
@@ -161,12 +161,12 @@ public class MyMusicMainInterface extends BaseActivity implements View.OnClickLi
         end_time.setText(formatTime);
     }
 
-    private void showAlbumCover() {
+    /*private void showAlbumCover() {
         Bitmap bitmap = MusicmediaUtils.getArtwork(this, musicInfo.getId(), musicInfo.getAlbum_id(), true);
         if (bitmap != null) {
             iv_singer_album.setImageBitmap(bitmap);
         }
-    }
+    }*/
 
 
     private void initClick() {

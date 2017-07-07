@@ -3,7 +3,6 @@ package com.mayday.xy.customproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -12,15 +11,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mayday.ShowPlayMusic.PlayService;
 import com.mayday.fragment.manager.localMusic_fragment;
-import com.mayday.fragment.manager.picture_fragment;
+import com.mayday.fragment.manager.webView_fragment;
 import com.mayday.fragment.manager.netMusic_fragment;
 import com.mayday.fragment.manager.mv_fragment;
 import com.mayday.tool.localMusicManager.MyLikeMusicInfo;
 import com.mayday.tool.localMusicManager.MyMusicMainInterface;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     private LinearLayout ll_album, ll_picture, ll_download, ll_history;
     private ImageView iv_album, iv_picture, iv_download, iv_history;
     private TextView tv_album, tv_picture, tv_download, tv_history;
@@ -37,6 +39,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initFirebase();
         startService(new Intent(this, PlayService.class));
         //初始化控件
         initView();
@@ -44,7 +47,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initEvent();
         //初始化并设置当前Fragment
         i = initFragment(0);
+
     }
+
+    private void initFirebase() {
+        mFirebaseAnalytics=FirebaseAnalytics.getInstance(this);
+    }
+
 
     @Override
     protected void onStart() {
@@ -91,7 +100,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case 2:
                 if (Download_fragment == null) {
-                    Download_fragment = new picture_fragment();
+                    Download_fragment = new webView_fragment();
                     transaction.add(R.id.fl_content, Download_fragment);
                     Ilove.setVisibility(View.GONE);
 
@@ -180,20 +189,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             case R.id.ll_picture:
                 tv_picture.setTextColor(0xFF1B940A);
-                tv_title.setText("PICTURE");
+                tv_title.setText("MV");
                 initFragment(1);
                 break;
 
             case R.id.ll_download:
                 tv_download.setTextColor(0xFF1B940A);
-                tv_title.setText("DOWNLOAD");
+                tv_title.setText("在线歌曲");
 
                 initFragment(2);
                 break;
 
             case R.id.ll_history:
                 tv_history.setTextColor(0xFF1B940A);
-                tv_title.setText("HISTORY_TODAY");
+                tv_title.setText("网络搜索");
                 initFragment(3);
                 break;
             default:
@@ -230,4 +239,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         stopService(new Intent(this,PlayService.class));
         //不处理当我们的应用被杀掉后再次进入到主播放界面时的播放状态了0-0
     }
+
 }

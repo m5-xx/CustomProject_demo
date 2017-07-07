@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mayday">
+        <item>ahsin</item>
+        <item>monster</item>
+        <item>masa</item>
+        <item>store</item>
+        <item>ming</item>
+
+    </string-array>
+</resources>
+
+<!--Resources res =getResources();　　String[] city=res.getStringArray(R.array.mayday);　　
+即可取得string-array name="city"下的所有item数据，-->

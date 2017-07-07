@@ -24,17 +24,21 @@ public abstract class BaseActivity extends FragmentActivity {
 
     private static final String TAG = AppCompatActivity.class.getSimpleName();
 
+    public BaseActivity() {
+        super();
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.music_main);
+//        setContentView(R.layout.music_main);
     }
 
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            //不同包中无法获取到类的类部类对象。
             PlayService.MyBinder binder = (PlayService.MyBinder) iBinder;
             playService = binder.getBindsObject();
             isBind = true;

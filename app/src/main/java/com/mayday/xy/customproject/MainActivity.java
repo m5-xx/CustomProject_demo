@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mayday.ShowPlayMusic.PlayService;
 import com.mayday.fragment.manager.localMusic_fragment;
 import com.mayday.fragment.manager.webView_fragment;
@@ -21,8 +19,6 @@ import com.mayday.tool.localMusicManager.MyLikeMusicInfo;
 import com.mayday.tool.localMusicManager.MyMusicMainInterface;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-    private FirebaseAnalytics mFirebaseAnalytics;
-
     private LinearLayout ll_album, ll_picture, ll_download, ll_history;
     private ImageView iv_album, iv_picture, iv_download, iv_history;
     private TextView tv_album, tv_picture, tv_download, tv_history;
@@ -35,11 +31,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     //要不要显示喜欢的音乐的图标
     int i=0;
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initFirebase();
+//        initFirebase();
         startService(new Intent(this, PlayService.class));
         //初始化控件
         initView();
@@ -47,13 +42,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initEvent();
         //初始化并设置当前Fragment
         i = initFragment(0);
-
     }
 
-    private void initFirebase() {
-        mFirebaseAnalytics=FirebaseAnalytics.getInstance(this);
-    }
+    @Override
+    public void onPositions(int position) {
 
+    }
 
     @Override
     protected void onStart() {
@@ -63,11 +57,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onPositions(int position) {
-
-    }
-
+    /**
+     * fragment重要方法
+     * @param index 需要显示的fragment
+     * @return
+     */
     private int initFragment(int index) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         //开启事务
@@ -220,7 +214,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void restartBotton() {
-        Log.i("MainActivity", "biubiu");
         tv_album.setTextColor(0xffffffff);
         tv_picture.setTextColor(0xffffffff);
         tv_download.setTextColor(0xffffffff);

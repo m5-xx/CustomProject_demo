@@ -14,7 +14,7 @@ import com.mayday.xy.customproject.R;
 import java.util.ArrayList;
 
 /**
- * Created by xy-pc on 2017/6/4.
+ * Created by xy-pc on 2017/6/24
  */
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -42,14 +42,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
+        //为了实现瀑布流的效果
         if (viewType == 1) {
             v = LayoutInflater.from(context).inflate(R.layout.view_rv_item, parent, false);
         } else {
             v = LayoutInflater.from(context).inflate(R.layout.view_rv_item_two, parent, false);
         }
-        ViewHolder viewHolder = new ViewHolder(v);
-
-        return viewHolder;
+        return new ViewHolder(v);
     }
 
     @Override

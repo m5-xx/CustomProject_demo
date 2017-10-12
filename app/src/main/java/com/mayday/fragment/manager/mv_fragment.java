@@ -26,7 +26,7 @@ import com.mayday.xy.customproject.R;
 import java.util.ArrayList;
 
 /**
- * Created by xy-pc on 2017/5/28.
+ * Created by xy-pc on 2017/6/29.
  */
 
 public class mv_fragment extends Fragment {
@@ -58,6 +58,8 @@ public class mv_fragment extends Fragment {
     public  static final String[] video_url = {information.zjycj_url, information.tthg_url, information.hh_url, information.sfy_url, information.rym_url, information.cmzw_url, information.jj_url, information.mayday0329_url, information.MaydayAnd831_url};
     public  static final int [] images={R.drawable.zmycj,R.drawable.tthg,R.drawable.hh,R.drawable.sfy,R.drawable.rym,R.drawable.cmzw,R.drawable.jj,
     R.drawable.mayday0329,R.drawable.glgl};
+
+
 
     @Nullable
     @Override
@@ -109,6 +111,7 @@ public class mv_fragment extends Fragment {
         });
     }
 
+    //ViewPager的Adapter
     class MyPagerAdapter extends StaticPagerAdapter {
         @Override
         public View getView(ViewGroup container, int position) {

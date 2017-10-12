@@ -19,8 +19,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.mayday.tool.localMusicManager.MusicInfo;
 import com.mayday.net.music.NetMusicAdapter;
+import com.mayday.tool.localMusicManager.MusicInfo;
 import com.mayday.xy.customproject.R;
 
 import org.json.JSONArray;
@@ -35,9 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -46,8 +44,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 通过AsyncTask来解析出对应的JSON数据，然后存放在listview里面，之后通过点击item来进行播放(仿照收藏播放)，点击下载按钮进行下载(下载 uri)。
- * Created by xy-pc on 2017/3/28.
+ * 野接口下载链接，由于他并没有提供在线播放的url地址，所以只要下载下来后才能够在本地播放。
+ * Created by xy-pc on 2017/6/28.
  */
 
 public class netMusic_fragment extends Fragment implements View.OnClickListener {
@@ -142,29 +140,6 @@ public class netMusic_fragment extends Fragment implements View.OnClickListener 
     };
 
 
-    // 判断网络是否连接
-    public static Boolean isNetWork(Context context) {
-        // 获得网络状态管理器
-        ConnectivityManager conn = (ConnectivityManager) context
-                .getSystemService(context.CONNECTIVITY_SERVICE);
-        if (conn == null) {
-            return false;
-        } else {
-            NetworkInfo netinfo[] = conn.getAllNetworkInfo();
-            if (netinfo != null) {
-                for (NetworkInfo net : netinfo) {
-                    if (net.getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-
-            }
-
-        }
-        return false;
-    }
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -182,16 +157,19 @@ public class netMusic_fragment extends Fragment implements View.OnClickListener 
                 //得到网页源码
                 getUrlPath = BAIDUMUSICURI + inputData;
                 Log.i("mayday--------->>", getUrlPath);
-                if(inputData==null||inputData.equals("")){
-                    Toast.makeText(getActivity(),"关键字不能为空",Toast.LENGTH_SHORT).show();
-                }else {
-                    //TODO 这里需要将下载过的音乐的url地址存入数据库中，这样我们再次下载的相同的音乐的时候就会提示该歌曲已下载的消息框。
+                if (inputData == null || inputData.equals("")) {
+                    Toast.makeText(getActivity(), "关键字不能为空", Toast.LENGTH_SHORT).show();
+                } else {
                     dialog.show();
-                    if(isNetWork(getActivity())){
+                    // 这里需要将下载过的音乐的url地址存入数据库中，这样我们再次下载的相同的音乐的时候就会提示该歌曲已下载的消息框(就不做这方面的处理了)。
+                    //这个检查网路状态的代码好像也有问题
+                    //TODO 检查网路状态的代码有误
+                    if (isNetworkAvailable(getActivity())) {
+                        Log.i("mayday", "boolean --->>" + isNetworkAvailable(getActivity()));
                         query2(getUrlPath);
-                    }else {
-                        Toast.makeText(getActivity(),"请检查网路连接状态",Toast.LENGTH_SHORT).show();
+                    } else {
                         dialog.dismiss();
+                        Toast.makeText(getActivity(), "请检查网路连接状态", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
@@ -217,7 +195,7 @@ public class netMusic_fragment extends Fragment implements View.OnClickListener 
      * @param jsonData
      * @return
      */
-    private MusicInfo doJson(String jsonData) {
+    private void doJson(String jsonData) {
         MusicInfo musicinfo = null;
         JSONObject jsonObject;
         final ArrayList<MusicInfo> lists = new ArrayList<>();
@@ -255,11 +233,47 @@ public class netMusic_fragment extends Fragment implements View.OnClickListener 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return musicinfo;
+//        return musicinfo;
+    }
+
+    // 判断网络是否连接状态(是否连接，连接是否可用一直判断不了，就不做判断了)
+    /*public static boolean isNetWork(Context context) {
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
+
+        //判断网络是否连接
+        if (networkInfo == null || !networkInfo.isAvailable()) {
+            // 当前没有网络连接
+            Toast.makeText(context.getApplicationContext(), "请先连接Internet！",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+            //判断网咯连接是否可用
+        }else {
+            return true;
+        }
+    }*/
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null && info.isConnected())
+            {
+                // 当前网络是连接的
+                if (info.getState() == NetworkInfo.State.CONNECTED)
+                {
+                    // 当前所连接的网络可用
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
      * 不知道为啥，通过okhttp来请求访问，获取不到数据。
+     *
      * @param url
      */
     public void dataWebDataMusic(final String url) {

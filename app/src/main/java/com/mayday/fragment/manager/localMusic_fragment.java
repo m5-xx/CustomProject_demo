@@ -1,6 +1,7 @@
 package com.mayday.fragment.manager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +29,9 @@ import java.io.BufferedWriter;
 import java.util.ArrayList;
 
 /**
- * Created by xy-pc on 2017/3/28.
+ * 当android的系统启动的时候，系统会自动扫描sdcard内的多媒体文件，并把获得的信息保存在一个系统数据库中，以后在其他程序中如果想要访问多媒体文件的信息，
+ * 其实就是在这个数据库中进行的，而不是直接去sdcard中取
+ * Created by xy-pc on 2017/6/19.
  */
 
 public class localMusic_fragment extends Fragment{
@@ -46,12 +50,11 @@ public class localMusic_fragment extends Fragment{
 
     private MyApplication app;
 
-    private Button refluse;
-
 
     //当fragment与Activity产生关联的时候调用
     @Override
     public void onAttach(Context context) {
+        //Fragement获取Activity的实例
         mainActivity= (BaseActivity) context;
         app= (MyApplication) getActivity().getApplication();
         super.onAttach(context);
@@ -59,6 +62,7 @@ public class localMusic_fragment extends Fragment{
 
     @Override
     public void onResume() {
+        Log.i("monster", "onResume: ");
         super.onResume();
         mainActivity.mBindService();
 
@@ -73,21 +77,16 @@ public class localMusic_fragment extends Fragment{
 
     @Override
     public void onStart() {
+        Log.i("monster", "onStart: ");
         super.onStart();
     }
 
-    /**
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i("monster", "onCreateView: ");
         View view=inflater.inflate(R.layout.localmusic_fragment,container,false);
         mRecylerView= (RecyclerView) view.findViewById(R.id.localMusicRecyclerView);
-        refluse=(Button)view.findViewById(R.id.refluse);
         initData();
         mLayoutManager=new GridLayoutManager(mContext,3, OrientationHelper.VERTICAL,false);
         mRecylerView.setLayoutManager(mLayoutManager);
@@ -103,19 +102,13 @@ public class localMusic_fragment extends Fragment{
             }
         });
 
-        refluse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MediaScannerConnection.scanFile(getActivity(), new String[] { Environment
-                        .getExternalStorageDirectory().getAbsolutePath()}, null, null);
-                initData();
-            }
-        });
         return view;
     }
 
     private void initData() {
-        //这里每次都调用过了的啊，没道理不扫描吧！！！
+        MediaScannerConnection.scanFile(getActivity(), new String[] { Environment
+                .getExternalStorageDirectory().getAbsolutePath()}, null, null);
+           Log.i("Ming", "initData: ");
         musicList= MusicmediaUtils.getMusicInfos(mContext);
         adapter=new MyAdapter(mContext,musicList);
     }
@@ -123,6 +116,19 @@ public class localMusic_fragment extends Fragment{
     @Override
     public void onPause() {
         super.onPause();
+        Log.i("monster", "onPause: ");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("monster", "onStop: ");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i("monster", "onDestroyView: ");
     }
 
     @Override
@@ -130,6 +136,5 @@ public class localMusic_fragment extends Fragment{
         mainActivity.mUnbindService();
         super.onDestroy();
     }
-
 
 }

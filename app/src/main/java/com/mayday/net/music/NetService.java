@@ -7,8 +7,6 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import com.mayday.tool.localMusicManager.MusicmediaUtils;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -106,10 +104,10 @@ public class NetService extends IntentService {
     public void onDestroy() {
         super.onDestroy();
         Toast.makeText(NetService.this,"下载成功",Toast.LENGTH_SHORT).show();
-        //TODO 发送广播通知本地音乐界面更新UI(暂时就先调用下这个方法吧，先看下运行情况)
-        //强制扫描SD卡
-        MediaScannerConnection.scanFile(this, new String[] { Environment
+//        //强制扫描媒体数据库
+        MediaScannerConnection.scanFile(getApplicationContext(), new String[] { Environment
                 .getExternalStorageDirectory().getAbsolutePath()}, null, null);
+        //待会这里应该还有一个Boolean类型的值，判断要不要扫面媒体库
     }
 
     public interface OnDownloadListener {

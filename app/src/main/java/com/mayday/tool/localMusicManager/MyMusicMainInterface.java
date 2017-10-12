@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 /**
  * 播放音乐主界面
- * Created by xy-pc on 2017/5/22.
+ * Created by xy-pc on 2017/6/22.
  */
 
 public class MyMusicMainInterface extends BaseActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
@@ -89,28 +89,29 @@ public class MyMusicMainInterface extends BaseActivity implements View.OnClickLi
 
         this.pos = position;
         Log.i("chenxiaoxiao", "回调函数回调--------------->>"+(huidiao++)+"次");
-
-        musicInfo = musicInfos.get(pos);
-        sb_music_progress.setMax((int) musicInfo.getDuration());
-
-        //将歌曲的总时间转换为我们的分/秒格式
-        long musicLong = musicInfo.getDuration();
-        formatTime = MusicmediaUtils.formatTime(musicLong);
-
-        boolean isExist=loveSqlDao.queryIsExist(musicInfo.getTitle(),musicInfo.getSinger());
-
-        if(isExist){
-            iv_isLike.setImageResource(like[1]);
-            musicInfo.setLove(true);
+        if(musicInfo==null){
+            Toast.makeText(this, "No Music", Toast.LENGTH_SHORT).show();
         }else {
-            iv_isLike.setImageResource(like[0]);
-            musicInfo.setLove(false);
+            musicInfo = musicInfos.get(pos);
+            sb_music_progress.setMax((int) musicInfo.getDuration());
+
+            //将歌曲的总时间转换为我们的分/秒格式
+            long musicLong = musicInfo.getDuration();
+            formatTime = MusicmediaUtils.formatTime(musicLong);
+            boolean isExist=loveSqlDao.queryIsExist(musicInfo.getTitle(),musicInfo.getSinger());
+            if(isExist){
+                iv_isLike.setImageResource(like[1]);
+                musicInfo.setLove(true);
+            }else {
+                iv_isLike.setImageResource(like[0]);
+                musicInfo.setLove(false);
+            }
+            //获取歌曲信息
+            showTitleAndSinger();
         }
-        Log.i("chenxiaoxiao", "--------------->>"+isExist);
+//        Log.i("chenxiaoxiao", "--------------->>"+isExist);
         //显示专辑封面
 //        showAlbumCover();
-        //获取歌曲信息
-        showTitleAndSinger();
     }
 
 

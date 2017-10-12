@@ -16,7 +16,7 @@ import com.mayday.xy.customproject.R;
 import java.util.List;
 
 /**
- * Created by xy-pc on 2017/5/26.
+ * Created by xy-pc on 2017/6/26.
  */
 
 public class MyLikeMusicInfo extends BaseActivity implements AdapterView.OnItemClickListener {
@@ -27,9 +27,7 @@ public class MyLikeMusicInfo extends BaseActivity implements AdapterView.OnItemC
     private MyLikeAdapter adapter;
     private List<MusicInfo> list;
     private LoveSqlDao loveSqlDao;
-    //    private MainActivity context;
     //当前歌曲的id(喜爱歌曲的id)
-    private int pos;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +57,6 @@ public class MyLikeMusicInfo extends BaseActivity implements AdapterView.OnItemC
 
     @Override
     public void onPositions(int position) {
-
     }
 
     @Override

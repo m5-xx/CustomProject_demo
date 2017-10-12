@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import io.vov.vitamio.Vitamio;
 
 /**
- * Created by xy-pc on 2017/5/22.
+ * Created by xy-pc on 2017/6/22.
  */
 
 public class MyApplication extends Application {

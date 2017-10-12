@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 该类实现喜爱歌曲的添加以及移除
  * 可以在主播放页面来调用该类
- * Created by xy-pc on 2017/5/26.
+ * Created by xy-pc on 2017/6/26.
  */
 
 public class LoveSqlDao  {

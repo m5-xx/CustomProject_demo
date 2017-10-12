@@ -13,7 +13,7 @@ import com.mayday.xy.customproject.R;
 import java.util.ArrayList;
 
 /**
- * Created by xy-pc on 2017/5/20.
+ * Created by xy-pc on 2017/6/20.
  */
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -33,8 +33,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.localmusic_adapter, null);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override

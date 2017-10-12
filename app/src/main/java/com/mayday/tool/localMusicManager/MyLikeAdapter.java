@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * 使用与收藏的音乐界面以及网路歌曲的界面显示
- * Created by xy-pc on 2017/5/26.
+ * Created by xy-pc on 2017/6/26.
  */
 
 public class MyLikeAdapter extends BaseAdapter {

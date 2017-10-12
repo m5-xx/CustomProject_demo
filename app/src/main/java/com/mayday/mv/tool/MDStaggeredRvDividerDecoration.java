@@ -11,7 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 /**
- * Created by xy-pc on 2017/5/14.
+ * Created by xy-pc on 2017/6/24.
  */
 
 public class MDStaggeredRvDividerDecoration extends RecyclerView.ItemDecoration {

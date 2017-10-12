@@ -3,7 +3,7 @@ package com.mayday.tool.localMusicManager;
 import com.j256.ormlite.field.DatabaseField;
 
 /**
- * Created by xy-pc on 2017/5/20.
+ * Created by xy-pc on 2017/6/20.
  */
 
 public class MusicInfo {

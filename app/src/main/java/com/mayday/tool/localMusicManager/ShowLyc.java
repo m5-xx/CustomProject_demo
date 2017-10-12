@@ -9,7 +9,7 @@ import android.util.Log;
 import com.mayday.xy.customproject.R;
 
 /**
- * Created by xy-pc on 2017/5/25.
+ * Created by xy-pc on 2017/6/25.
  */
 
 public class ShowLyc extends AppCompatActivity {

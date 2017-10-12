@@ -1,7 +1,7 @@
 package com.mayday.mv_until;
 
 /**
- * Created by xy-pc on 2017/4/23.
+ * Created by xy-pc on 2017/6/23.
  */
 
 public class video_information {

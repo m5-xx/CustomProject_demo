@@ -8,13 +8,13 @@ import android.provider.MediaStore;
 import java.util.ArrayList;
 
 /**
- * Created by xy-pc on 2017/5/20.
+ * Created by xy-pc on 2017/6/20.
  *
  */
 
 public class MusicmediaUtils {
     //添加歌曲信息到集合中，并以集合形式返回
-    public static ArrayList<MusicInfo> getMusicInfos(Context context) {
+    public static ArrayList<MusicInfo>  getMusicInfos(Context context) {
         //长度>2min以上
         ContentResolver contentResolver = context.getContentResolver();
         //MediaStore.Audio.Media.DURATION + ">120000"第三个参数可以指定获取到歌曲的时长(过滤)

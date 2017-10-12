@@ -26,7 +26,7 @@ import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
 /**
- * Created by 鹤 on 2015/10/29.
+ * Created by 鹤 on 2017/6/29.
  */
 public class MyMediaController extends MediaController {
 

@@ -13,7 +13,7 @@ import android.util.Log;
 import com.mayday.ShowPlayMusic.PlayService;
 
 /**
- * Created by xy-pc on 2017/5/22.
+ * Created by xy-pc on 2017/6/22.
  */
 
 public abstract class BaseActivity extends FragmentActivity {

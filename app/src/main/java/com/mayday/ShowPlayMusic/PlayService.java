@@ -18,8 +18,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * 播放音乐服务
- * Created by xy-pc on 2017/5/20.
+ * 播放音乐核心服务类
+ * Created by xy-pc on 2017/6/20.
  */
 
 public class PlayService extends Service implements MediaPlayer.OnCompletionListener {
@@ -99,6 +99,7 @@ public class PlayService extends Service implements MediaPlayer.OnCompletionList
         }
         musics = musciInfo.get(position);
         try {
+            //MediaPalyer核心api
             mPlay.reset();
             mPlay.setDataSource(this, Uri.parse(musics.getUrl()));
             mPlay.prepare();
@@ -116,6 +117,7 @@ public class PlayService extends Service implements MediaPlayer.OnCompletionList
             @Override
             public void run() {
                 int progress = getCurrentProgress();
+                //發送廣播到主綫程中
                 Intent intent = new Intent("progress_broadcast");
 
                 intent.putExtra("MusicProgress", progress);
